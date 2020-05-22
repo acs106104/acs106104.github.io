@@ -10,9 +10,7 @@
     <p id="test"></p>
     <script>
         var x,y,z;
-        document.getElementById("test").innerHTML = "x:"+x+"<br>"+
-                                                    "y:"+y+"<br>"+
-                                                    "z:"+z;
+
         if (!('ondevicemotion' in window)) {
             alert('DeviceMotionEvent not support');
          } else {
@@ -20,6 +18,9 @@
                x = Math.round(event.accelerationIncludingGravity.x);
                y = Math.round(event.accelerationIncludingGravity.y);
                z = Math.round(event.accelerationIncludingGravity.z);
+               document.getElementById("test").innerHTML = "x:"+x+"<br>"+
+                                                            "y:"+y+"<br>"+
+                                                             "z:"+z;
             });
          }
 
