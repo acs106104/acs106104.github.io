@@ -12,27 +12,20 @@
         document.getElementById("test").innerHTML = "x:"+x+"<br>"+
                                                     "y:"+y+"<br>"+
                                                     "z:"+z;
+        if (!('ondevicemotion' in window)) {
+            alert('DeviceMotionEvent not support');
+         } else {
+            window.addEventListener('devicemotion', function(event) {
+               x = Math.round(event.accelerationIncludingGravity.x);
+               y = Math.round(event.accelerationIncludingGravity.y);
+               z = Math.round(event.accelerationIncludingGravity.z);
+            });
+         }
 
-        var lastX,lastY,lastZ,
+         var lastX,lastY,lastZ,
             lastShake = new Date().getTime(),
             threshold = 10;
-        
-        //監聽動作感測事件
-        if (window.DeviceMotionEvent) {
-            window.addEventListener('devicemotion',deviceMotionHandler, false);
-        }
-        else{
-            alert('DeviceMotionEvent not support');
-        }
-        //獲取重力加速度
-        function deviceMotionHandler(eventData) {
-            var acceleration = eventData.accelerationIncludingGravity;
-            x = acceleration.x;
-            y = acceleration.y;
-            z = acceleration.z;
-            console.log(x);
-        }
-
+            
         if(lastX !== null && lastY !== null && lastZ !== null){
             //Get the distance moved
             var diffX = Math.abs(x-lastX);
