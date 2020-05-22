@@ -8,8 +8,12 @@
 <body>
     <h1>TEST</h1>
     <p id="test"></p>
+    <p id="test2"></p>
     <script>
         var x,y,z;
+        var lastX,lastY,lastZ,
+                lastShake = new Date().getTime(),
+                threshold = 10;
 
         if (!('ondevicemotion' in window)) {
             alert('DeviceMotionEvent not support');
@@ -21,34 +25,33 @@
                document.getElementById("test").innerHTML = "x:"+x+"<br>"+
                                                             "y:"+y+"<br>"+
                                                              "z:"+z;
+
+                if(lastX !== null && lastY !== null && lastZ !== null){
+                    //Get the distance moved
+                    var diffX = Math.abs(x-lastX);
+                    var diffY = Math.abs(y-lastY);
+                    var diffZ = Math.abs(z-lastZ);
+                    document.getElementById("test2").innerHTML = "diff-X:"+diffX+"<br>"+
+                                                            "diff-Y:"+diffY+"<br>"+
+                                                             "diff-Z:"+diffZ;
+                    //shake detection code will go here
+                }
+                lastX = x;
+                lastY = y;
+                lastZ = z;
+
+                if(diffX > threshold && diffY > threshold ||
+                    diffX > threshold && diffZ > threshold ||
+                    diffY > threshold && diffZ > threshold){
+                    var now = new Date().getTime();
+                    var diffTime = now - lastShake;
+                    if(diffTime > 500){
+                        alert("Shaked!");
+                        lastShake = now;
+                    }
+                }
             });
          }
-
-         var lastX,lastY,lastZ,
-            lastShake = new Date().getTime(),
-            threshold = 10;
-
-        if(lastX !== null && lastY !== null && lastZ !== null){
-            //Get the distance moved
-            var diffX = Math.abs(x-lastX);
-            var diffY = Math.abs(y-lastY);
-            var diffZ = Math.abs(z-lastZ);
-            //shake detection code will go here
-        }
-        lastX = x;
-        lastY = y;
-        lastZ = z;
-
-        if(diffX > threshold && diffY > threshold ||
-            diffX > threshold && diffZ > threshold ||
-            diffY > threshold && diffZ > threshold){
-            var now = new Date().getTime();
-            var diffTime = now - lastShake;
-            if(diffTime > 500){
-                alert("Shaked!");
-                lastShake = now;
-            }
-        }
     </script>
 </body>
 </html>
