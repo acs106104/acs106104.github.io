@@ -1,57 +1,27 @@
+<!--https://github.com/Zainking/learningPixi#introduction-->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+	<meta charset="utf-8">
+	<title>Character</title>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.2/pixi.js"></script>
+	<script type="text/javascript" src="./libs/dragonBones/dragonBones.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-    <h1>TEST</h1>
-    <p id="test"></p>
-    <p id="test2"></p>
-    <script>
-        var x,y,z;
-        var lastX,lastY,lastZ,
-                lastShake = new Date().getTime(),
-                threshold = 10;
+	<!--安装 Pixi-->
+	<script type="text/javascript">
+		let type = "WebGL"
+		if(!PIXI.utils.isWebGLSupported()){
+			type = "canvas"
+		}
+		PIXI.utils.sayHello(type)
+	</script>
 
-        if (!('ondevicemotion' in window)) {
-            alert('DeviceMotionEvent not support');
-         } else {
-            window.addEventListener('devicemotion', function(event) {
-               x = Math.round(event.accelerationIncludingGravity.x);
-               y = Math.round(event.accelerationIncludingGravity.y);
-               z = Math.round(event.accelerationIncludingGravity.z);
-               document.getElementById("test").innerHTML = "x:"+x+"<br>"+
-                                                            "y:"+y+"<br>"+
-                                                             "z:"+z;
-
-                if(lastX !== null && lastY !== null && lastZ !== null){
-                    //Get the distance moved
-                    var diffX = Math.abs(x-lastX);
-                    var diffY = Math.abs(y-lastY);
-                    var diffZ = Math.abs(z-lastZ);
-                    document.getElementById("test2").innerHTML = "diff-X:"+diffX+"<br>"+
-                                                            "diff-Y:"+diffY+"<br>"+
-                                                             "diff-Z:"+diffZ;
-                    //shake detection code will go here
-                }
-                lastX = x;
-                lastY = y;
-                lastZ = z;
-
-                if(diffX > threshold && diffY > threshold ||
-                    diffX > threshold && diffZ > threshold ||
-                    diffY > threshold && diffZ > threshold){
-                    var now = new Date().getTime();
-                    var diffTime = now - lastShake;
-                    if(diffTime > 500){
-                        alert("Shaked!");
-                        lastShake = now;
-                    }
-                }
-            });
-         }
-    </script>
+	<!--創建Pixi 應用 和 舞台-->
+	<script src="createPixiStage.js"></script>
+    <!--進入 角色系統-->
+    <script src="characterSystem.js"></script>
 </body>
 </html>
