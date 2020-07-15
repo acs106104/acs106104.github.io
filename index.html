@@ -4,10 +4,15 @@
 <head>
 	<meta charset="utf-8">
 	<title>Character</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.5/pixi.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pixi-filters@2.6.1/dist/pixi-filters.min.js"></script>
 
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.2/pixi.js"></script>
 	<script type="text/javascript" src="./libs/dragonBones/dragonBones.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.2/pixi.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/pixi-filters@latest/dist/pixi-filters.js"></script> -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 	<!--安装 Pixi-->
@@ -18,10 +23,11 @@
 		}
 		PIXI.utils.sayHello(type)
 	</script>
-
-	<!--創建Pixi 應用 和 舞台-->
+    <!--創建Pixi 應用 和 舞台-->
+    <canvas id="main"></canvas>
 	<script src="createPixiStage.js"></script>
     <!--進入 角色系統-->
+    <script src="character.js"></script>
     <script src="characterSystem.js"></script>
 </body>
 </html>

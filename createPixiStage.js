@@ -1,26 +1,31 @@
+//Aliases
+let Application = PIXI.Application,
+    Container = PIXI.Container,
+    loader = PIXI.loader,
+    resource = PIXI.loader.resources,
+    TextureCache = PIXI.utils.TextureCache,
+    Sprite = PIXI.Sprite;
+
 /* 创建Pixi 应用 和 舞台 */
-var app = new PIXI.Application();
-document.body.appendChild(app.view);
+var app = new Application({
+    width: 1440,
+    height: 821,
+    antialias: true,    // default: false
+    transparent: false, // default: false
+    resolution: 1,       // default: 1      
+    view: document.getElementById('main')
+  });
+
 /* 渲染畫面和resize畫面(滿版畫面) */
 app.renderer.view.style.position = "absolute";
 app.renderer.view.style.display = "block";
 app.renderer.autoResize = true;
 app.renderer.resize(1440, 821);
-// app.renderer.resize(window.innerWidth, window.innerHeight);
 app.renderer.backgroundColor = 0xC9DDF0;//更新畫面顏色
 
-// // Listen for window resize events
-// window.addEventListener('resize', resize);
+document.body.appendChild(app.view);
 
-// // Resize function window
-// function resize() {
-// 	// Resize the renderer
-// 	app.renderer.resize(window.innerWidth, window.innerHeight);
-// }
-
-var width =  app.screen.width;
-var height = app.screen.height;
-
+/* 視窗調整 */
 function onResize() { 
     var w = window.innerWidth; 
     var h = window.innerHeight; 
