@@ -18,6 +18,7 @@ var height = app.screen.height;
 var show_area;//container
 var dressing_room;
 var character;//角色
+var item_data;//角色配件
 var user = new Character();
 
 loader
@@ -25,6 +26,9 @@ loader
     .add("./resource/icon/icon_hair.png")
 	.add("./resource/icon/icon_clothes.png")
     .add("./resource/icon/icon_pant.png")
+    .add("./resource/icon/icon_shoes.png")
+    .add("./resource/icon/icon_hairdeco.png")
+    .add("./resource/icon/icon_wristdeco.png")
     .add("./resource/genderGirl.png")
     .add("./resource/genderBoy.png")
     .add("dragonBonesData", "./resource/Character/Character_ske.json")
@@ -42,6 +46,7 @@ loader.load();
     /* check使用者是不是是否有創過角角色 */
     //尚未創建角色則執行
     if(newUser){
+        user.call_item_data();//取得角色配件資料
         user.create_new_character();
     }
     else
